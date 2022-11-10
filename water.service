@@ -1,0 +1,13 @@
+[Unit]
+Description=Water Python Service
+After=multi-user.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/pi/water
+User=pi
+Restart=always
+ExecStart=/usr/bin/python3 /home/pi/water/water.py
+
+[Install]
+WantedBy=multi-user.target
