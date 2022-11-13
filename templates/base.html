@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utilities</title>
+  <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>Utilities</h1>
+
+    <!-- recent chart -->
+    <div class="row">
+      <div class="col">
+        <h2>Recent Pulses</h2>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for records in today %}
+            <tr>
+            {% for record in records %}
+              <td scope="row">{{ record.split(" ")[0] }}</td>
+              <td>{{ record.split(" ")[1] }}</td>
+            {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+    <!-- daily chart -->
+    <div class="row">
+      <div class="col">
+        <h2>Daily Total</h2>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Gallons</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for record in daily %}
+            <tr>
+              <td scope="row">{{ record[0] }}</td>
+              <td>{{ record[1] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="../static/js/bootstrap.min.js"></script>
+  
+</body>
+</html>

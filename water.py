@@ -22,7 +22,7 @@ with sqlite3.connect(DB_PATH) as con:
 def log_pulse(channel):
     """Log water meter pulse to sqlite"""
     if GPIO.input(channel) == GPIO.HIGH:
-        dt = datetime.now()
+        dt = datetime.utcnow()
         print("Pulse: {}".format(dt))
         with sqlite3.connect(DB_PATH) as con:
             cur = con.cursor()

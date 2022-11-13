@@ -1,0 +1,13 @@
+[Unit]
+Description=Flask Site Service
+After=multi-user.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/pi/water
+User=pi
+Restart=always
+ExecStart=/usr/bin/python3 /home/pi/water/flask-site.py
+
+[Install]
+WantedBy=multi-user.target
