@@ -13,25 +13,33 @@
 
     <h1>Utilities</h1>
 
-    <!-- recent chart -->
+    <!-- latest pulse -->
     <div class="row">
       <div class="col">
-        <h2>Recent Pulses</h2>
+        <h2>Latest Pulse</h2>
+        <blockquote class="blockquote">
+          {{latest[0][0]}}
+        </blockquote>
+      </div>
+    </div>
+
+    <!-- hourly total -->
+    <div class="row">
+      <div class="col">
+        <h2>Hourly Total</h2>
 
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Date</th>
-              <th scope="col">Time</th>
+              <th scope="col">Hour</th>
+              <th scope="col">Gallons</th>
             </tr>
           </thead>
           <tbody>
-            {% for records in today %}
+            {% for record in today %}
             <tr>
-            {% for record in records %}
-              <td scope="row">{{ record.split(" ")[0] }}</td>
-              <td>{{ record.split(" ")[1] }}</td>
-            {% endfor %}
+              <td scope="row">{{ record[0] }}</td>
+              <td>{{ record[1] }}</td>
             </tr>
             {% endfor %}
           </tbody>
@@ -40,7 +48,7 @@
       </div>
     </div>
 
-    <!-- daily chart -->
+    <!-- daily total -->
     <div class="row">
       <div class="col">
         <h2>Daily Total</h2>

@@ -23,16 +23,30 @@ def et_offset_now():
     dt = datetime.datetime.utcnow().date()
     return 5 - is_dst(dt)
 
+def latest():
+    sql = """
+            select
+                strftime('%Y-%m-%d %H:%M', pulse, '-{offset} hours') as time
+            from water
+            order by time desc
+            limit 1
+        ;
+    """
+    sql = sql.format(offset=et_offset_now())
+    return query(sql)
+
 def today():
     limit = datetime.datetime.utcnow() - datetime.timedelta(hours=et_offset_now())
     limit = limit.date()
     sql = """
-        select
-            strftime('%Y-%m-%d %H:%M', pulse, '-{offset} hours') as time
+        select 
+            cast(strftime('%H', pulse, '-{offset} hours') as integer) as hour,
+            count(*) * 10 as gallons
         from water
-        where strftime('%Y-%m-%d', time) == '{limit}'
-        order by rowid desc
-        ;
+        where strftime('%Y-%m-%d', pulse, '-{offset} hours') == '{limit}'
+        group by hour
+        order by hour asc
+        ;        
     """
     sql = sql.format(offset=et_offset_now(), limit=limit)
     return query(sql)
